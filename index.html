@@ -45,7 +45,7 @@
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
   body {
     font-family: 'Archivo', system-ui, sans-serif;
     background: var(--bg);
@@ -55,6 +55,7 @@
     line-height: 1.5;
     zoom: 0.85;
   }
+  section, .hero, footer, header { overflow-x: clip; }
   ::selection { background: var(--cyan); color: var(--white); }
   a { color: inherit; text-decoration: none; }
 
@@ -201,11 +202,12 @@
   /* Glow ring behind the dark card */
   .fp-card::before {
     content: ''; position: absolute;
-    inset: -40px; z-index: -1;
-    border-radius: 40px;
+    inset: -20px; z-index: -1;
+    border-radius: 30px;
     background: radial-gradient(circle, rgba(8,145,178,0.25), rgba(34,211,238,0.10), transparent 70%);
     filter: blur(30px);
     animation: glowPulse 6s ease-in-out infinite;
+    max-width: 100vw;
   }
   @keyframes glowPulse {
     0%, 100% { opacity: 0.5; transform: scale(1); }
@@ -780,7 +782,39 @@
     :root { --section-pad: 4rem; }
     .feature { padding: 1.75rem; }
     form.booking { padding: 1.75rem; }
-    .fp-card { padding: 1.5rem; }
+    .fp-card { padding: 1.25rem; }
+    .hero { padding: 7rem 1.25rem 2rem; }
+    .fp-track { gap: 0.4rem; }
+    .fp-node { width: 38px; height: 38px; font-size: 0.75rem; }
+    .fp-stats { gap: 0.5rem; }
+    .fp-stat { padding: 0.7rem 0.5rem; }
+    .fp-stat .num { font-size: 1.2rem; }
+    .transform-anim { gap: 0.6rem; flex-wrap: wrap; justify-content: center; }
+    .file-icon { width: 40px; height: 48px; }
+    .slide-thumb { width: 30px; height: 36px; }
+    .journey-path { gap: 0.3rem; }
+    .journey-stop { width: 42px; height: 42px; font-size: 1.1rem; }
+    .journey-trail { width: 14px; }
+    .user-dots { gap: 4px; }
+    .user-dot { width: 28px; height: 28px; font-size: 0.5rem; }
+    .shield-anim { transform: scale(0.85); }
+    .compare-stack { gap: 1rem; }
+    .compare { padding: 1.5rem; }
+    .stats-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .suite-grid { grid-template-columns: 1fr; }
+    .footer-links { flex-wrap: wrap; gap: 1rem; justify-content: center; }
+    .form-cta { flex-direction: column; align-items: stretch; }
+    .form-cta button[type="submit"] { justify-content: center; }
+    .powered-headline { font-size: clamp(2.2rem, 12vw, 8rem); }
+    .hero-ctas { flex-direction: column; width: 100%; }
+    .hero-ctas .btn { width: 100%; justify-content: center; }
+  }
+
+  @media (max-width: 400px) {
+    .fp-node { width: 32px; height: 32px; font-size: 0.7rem; }
+    .fp-track { gap: 0.3rem; }
+    .slide-thumb { width: 26px; height: 32px; }
+    .transform-arrow { font-size: 1.2rem; }
   }
 </style>
 </head>
