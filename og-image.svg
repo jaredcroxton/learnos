@@ -1,12 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
   <defs>
-    <radialGradient id="glow1" cx="25%" cy="35%" r="65%">
+    <radialGradient id="glow1" cx="50%" cy="40%" r="60%">
       <stop offset="0%" stop-color="#0891B2" stop-opacity="0.12"/>
       <stop offset="100%" stop-color="#0891B2" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="glow2" cx="80%" cy="70%" r="55%">
-      <stop offset="0%" stop-color="#22D3EE" stop-opacity="0.10"/>
-      <stop offset="100%" stop-color="#22D3EE" stop-opacity="0"/>
     </radialGradient>
     <linearGradient id="iconBg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#0891B2"/>
@@ -15,52 +11,47 @@
   </defs>
 
   <rect width="1200" height="630" fill="#F8FAFC"/>
-  <ellipse cx="300" cy="220" rx="500" ry="360" fill="url(#glow1)"/>
-  <ellipse cx="950" cy="440" rx="420" ry="320" fill="url(#glow2)"/>
+  <ellipse cx="600" cy="280" rx="500" ry="400" fill="url(#glow1)"/>
 
-  <!-- Brand lockup -->
-  <g transform="translate(80, 72)">
-    <rect width="64" height="64" rx="16" fill="url(#iconBg)"/>
-    <path d="M18 18h16a6 6 0 0 1 6 6v22a5 5 0 0 0-5-5H18z" fill="#fff" opacity="0.95"/>
-    <path d="M46 18H34a6 6 0 0 0-6 6v22a5 5 0 0 1 5-5h13z" fill="#fff" opacity="0.95"/>
-    <text x="82" y="48"
+  <!-- Brand lockup centered -->
+  <g transform="translate(600, 80)" text-anchor="middle">
+    <rect x="-32" y="0" width="64" height="64" rx="16" fill="url(#iconBg)"/>
+    <path d="M-14 18h16a6 6 0 0 1 6 6v22a5 5 0 0 0-5-5h-17z" fill="#fff" opacity="0.95"/>
+    <path d="M14 18h-12a6 6 0 0 0-6 6v22a5 5 0 0 1 5-5h13z" fill="#fff" opacity="0.95"/>
+    <text x="0" y="105"
           font-family="Archivo, 'Helvetica Neue', Arial, sans-serif"
-          font-weight="800" font-size="36"
+          font-weight="800" font-size="28"
           fill="#0F172A"
-          letter-spacing="-0.5">LearnOS</text>
+          text-anchor="middle">LearnOS</text>
   </g>
 
-  <!-- Headline -->
-  <g transform="translate(80, 230)">
-    <text x="0" y="0"
-          font-family="Archivo, 'Helvetica Neue', Arial, sans-serif"
-          font-weight="900" font-size="90"
-          fill="#0F172A"
-          letter-spacing="-3">STOP PAYING</text>
-    <text x="0" y="100"
-          font-family="'Instrument Serif', Georgia, serif"
-          font-style="italic" font-size="100"
-          fill="#0891B2"
-          letter-spacing="-2">to update</text>
-    <text x="0" y="200"
-          font-family="Archivo, 'Helvetica Neue', Arial, sans-serif"
-          font-weight="900" font-size="90"
-          fill="#0F172A"
-          letter-spacing="-3">YOUR OWN LMS.</text>
-  </g>
+  <!-- Headline centered -->
+  <text x="600" y="280"
+        font-family="Archivo, 'Helvetica Neue', Arial, sans-serif"
+        font-weight="900" font-size="82"
+        fill="#0F172A" text-anchor="middle"
+        letter-spacing="-2">STOP PAYING</text>
+  <text x="600" y="370"
+        font-family="'Instrument Serif', Georgia, serif"
+        font-style="italic" font-size="90"
+        fill="#0891B2" text-anchor="middle"
+        letter-spacing="-2">to update</text>
+  <text x="600" y="460"
+        font-family="Archivo, 'Helvetica Neue', Arial, sans-serif"
+        font-weight="900" font-size="82"
+        fill="#0F172A" text-anchor="middle"
+        letter-spacing="-2">YOUR OWN LMS.</text>
 
-  <!-- Tagline -->
-  <text x="80" y="590"
+  <!-- Tagline centered -->
+  <text x="600" y="560"
         font-family="'JetBrains Mono', monospace"
-        font-size="18" font-weight="500"
-        fill="#64748B"
-        letter-spacing="3">ONE BUILD . ONE PRICE . OWNED FOREVER</text>
+        font-size="16" font-weight="500"
+        fill="#64748B" text-anchor="middle"
+        letter-spacing="4">ONE BUILD .  ONE PRICE .  OWNED FOREVER</text>
 
-  <!-- Powered by -->
-  <text x="1120" y="590"
+  <text x="600" y="600"
         font-family="'JetBrains Mono', monospace"
-        font-size="14"
-        fill="#64748B"
-        letter-spacing="2"
-        text-anchor="end">POWERED BY PERFORMOS</text>
+        font-size="13"
+        fill="#94A3B8" text-anchor="middle"
+        letter-spacing="2">POWERED BY PERFORMOS</text>
 </svg>
