@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LearnOS · Stop renting your LMS. Start owning it.</title>
+<meta name="description" content="A fully custom learning management system you own outright. One build, one price, no monthly seat fees. Upload PowerPoints, build interactive modules, track compliance. Powered by performOS.">
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="theme-color" content="#F8FAFC">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LearnOS">
+<meta property="og:title" content="LearnOS">
+<meta property="og:description" content="Stop renting your LMS. Start owning it.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="LearnOS">
+<meta name="twitter:description" content="Stop renting your LMS. Start owning it.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #F8FAFC;
+    --bg-2: #E2E8F0;
+    --bg-3: #CBD5E1;
+    --ink: #0F172A;
+    --ink-2: #1E293B;
+    --ink-3: #334155;
+    --cyan: #0891B2;
+    --cyan-2: #22D3EE;
+    --cyan-soft: #CFFAFE;
+    --cyan-deep: #0E7490;
+    --muted: #64748B;
+    --border: rgba(15,23,42,0.07);
+    --border-dark: rgba(255,255,255,0.08);
+    --white: #FFFFFF;
+    --hero-h1: clamp(2.6rem, 5.5vw, 5rem);
+    --hero-h1-s: clamp(2rem, 4.5vw, 4rem);
+    --h2: clamp(2.4rem, 5.5vw, 5rem);
+    --section-pad: clamp(5rem, 10vw, 9rem);
+    --radius: 12px;
+    --radius-lg: 24px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Archivo', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    line-height: 1.5;
+    zoom: 0.85;
+  }
+  ::selection { background: var(--cyan); color: var(--white); }
+  a { color: inherit; text-decoration: none; }
+
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.9s ease, transform 0.9s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  .stagger > * { transition-delay: calc(var(--i, 0) * 80ms); }
+
+  .fade { opacity: 0; transform: translateY(20px); animation: fadeUp 0.9s ease forwards; }
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+  .d1{animation-delay:.05s}.d2{animation-delay:.12s}.d3{animation-delay:.19s}.d4{animation-delay:.26s}.d5{animation-delay:.33s}.d6{animation-delay:.40s}.d7{animation-delay:.47s}
+
+  .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; }
+
+  /* HEADER */
+  header {
+    position: fixed; inset: 0 0 auto; z-index: 100;
+    padding: 1.1rem clamp(1rem, 3vw, 2.5rem);
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(248,250,252,0.8);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    transition: padding 0.3s, background 0.3s;
+  }
+  header.scrolled { padding: 0.65rem clamp(1rem, 3vw, 2.5rem); background: rgba(248,250,252,0.94); }
+  .brand { display: flex; align-items: center; gap: 0.65rem; font-weight: 800; font-size: 1.05rem; letter-spacing: -0.01em; }
+  .brand-mark {
+    width: 34px; height: 34px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--cyan), var(--cyan-2));
+    display: grid; place-items: center;
+    box-shadow: 0 4px 14px rgba(8,145,178,0.3), inset 0 1px 0 rgba(255,255,255,0.3);
+  }
+  .brand-mark svg { width: 18px; height: 18px; color: var(--white); }
+  nav ul { list-style: none; display: flex; gap: 2.2rem; align-items: center; font-size: 0.85rem; font-weight: 500; }
+  nav a { color: var(--ink); opacity: 0.7; transition: opacity 0.2s, color 0.2s; }
+  nav a:hover { opacity: 1; color: var(--cyan); }
+  .nav-cta {
+    background: var(--ink); color: var(--bg) !important;
+    padding: 0.65rem 1.2rem; border-radius: 999px;
+    font-weight: 700; opacity: 1 !important;
+    transition: transform 0.2s, background 0.2s;
+  }
+  .nav-cta:hover { background: var(--cyan); color: var(--white) !important; transform: translateY(-1px); }
+  @media (max-width: 760px) { nav ul li:not(:last-child) { display: none; } }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 1rem 1.6rem; border-radius: var(--radius);
+    font-weight: 700; font-size: 0.95rem; border: none; cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  }
+  .btn-primary { background: var(--ink); color: var(--bg); box-shadow: 0 8px 24px rgba(15,23,42,0.16); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(15,23,42,0.22); }
+  .btn-secondary { background: var(--cyan); color: var(--white); box-shadow: 0 8px 20px rgba(8,145,178,0.25); }
+  .btn-secondary:hover { transform: translateY(-2px); background: var(--cyan-deep); }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid rgba(15,23,42,0.15); }
+  .btn-ghost:hover { background: var(--ink); color: var(--bg); }
+  .btn .arrow { transition: transform 0.2s; }
+  .btn:hover .arrow { transform: translateX(4px); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; padding: 8rem 1.5rem 3rem;
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+  .orb {
+    position: absolute; border-radius: 50%; filter: blur(80px);
+    animation: drift 16s ease-in-out infinite;
+  }
+  .orb.one { top: -15%; left: -10%; width: 55vw; height: 55vw; background: rgba(8,145,178,0.10); }
+  .orb.two { bottom: -20%; right: -12%; width: 60vw; height: 60vw; background: rgba(34,211,238,0.08); animation-delay: -6s; }
+  .orb.three { top: 50%; left: 45%; width: 30vw; height: 30vw; background: rgba(15,23,42,0.04); animation: drift 20s ease-in-out infinite; animation-delay: -3s; }
+  @keyframes drift { 0%,100% { transform: scale(1) translate(0,0); } 50% { transform: scale(1.12) translate(2%,-3%); } }
+
+  .hero-inner {
+    max-width: 1400px; margin: 0 auto; width: 100%;
+    position: relative; z-index: 2;
+    display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; align-items: center;
+  }
+  @media (max-width: 960px) { .hero-inner { grid-template-columns: 1fr; gap: 3rem; } }
+
+  .eyebrow {
+    color: var(--cyan);
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    padding: 0.4rem 0.9rem;
+    border: 1px solid rgba(8,145,178,0.25);
+    border-radius: 999px;
+    background: rgba(8,145,178,0.05);
+    margin-bottom: 2.5rem;
+  }
+  .eyebrow .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 8px var(--cyan);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 50% { opacity: 0.4; } }
+
+  h1.display {
+    font-weight: 900; letter-spacing: -0.04em; line-height: 0.88;
+    text-transform: uppercase;
+  }
+  h1.display .l1 { font-size: var(--hero-h1-s); display: block; }
+  h1.display .l2 { font-size: var(--hero-h1); display: block; color: var(--cyan); font-style: italic; font-family: 'Instrument Serif', serif; font-weight: 400; letter-spacing: -0.02em; line-height: 0.9; }
+  h1.display .l3 { font-size: var(--hero-h1-s); display: block; }
+
+  .hero-sub { max-width: 540px; font-size: clamp(1.05rem, 1.4vw, 1.2rem); color: var(--muted); margin: 2rem 0 2.5rem; line-height: 1.55; }
+  .hero-sub b { color: var(--ink); font-weight: 600; }
+
+  .hero-ctas { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .hero-trust {
+    margin-top: 3rem; display: flex; align-items: center; gap: 1rem;
+    color: var(--muted); font-size: 0.85rem;
+  }
+  .hero-trust .line { width: 40px; height: 1px; background: var(--bg-3); }
+
+  /* FlightPath preview card */
+  .fp-card {
+    background: var(--ink);
+    color: var(--bg);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    box-shadow: 0 30px 80px rgba(15,23,42,0.25), 0 0 0 1px rgba(15,23,42,0.06);
+    animation: floatCard 8s ease-in-out infinite;
+    position: relative;
+    z-index: 2;
+  }
+  @keyframes floatCard { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+  .fp-card .fp-label { color: var(--cyan-2); }
+  .fp-card .fp-module h4 { color: var(--bg); }
+  .fp-card .fp-module p { color: var(--muted); }
+  .fp-card .fp-stat { background: rgba(255,255,255,0.06); }
+  .fp-card .fp-progress-bar { background: rgba(255,255,255,0.08); }
+  .fp-card .fp-progress-label { color: rgba(248,250,252,0.5); }
+  .fp-card .card-bar span { background: rgba(255,255,255,0.12); }
+  .fp-card .card-bar span:nth-child(1) { background: #FF5F57; }
+  .fp-card .card-bar span:nth-child(2) { background: #FEBC2E; }
+  .fp-card .card-bar span:nth-child(3) { background: #28C840; }
+
+  /* Glow ring behind the dark card */
+  .fp-card::before {
+    content: ''; position: absolute;
+    inset: -40px; z-index: -1;
+    border-radius: 40px;
+    background: radial-gradient(circle, rgba(8,145,178,0.25), rgba(34,211,238,0.10), transparent 70%);
+    filter: blur(30px);
+    animation: glowPulse 6s ease-in-out infinite;
+  }
+  @keyframes glowPulse {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50%      { opacity: 1; transform: scale(1.05); }
+  }
+
+  .card-bar { display: flex; gap: 0.4rem; margin-bottom: 1rem; }
+  .card-bar span { width: 10px; height: 10px; border-radius: 50%; background: var(--bg-2); }
+  .card-bar span:nth-child(1) { background: #FF5F57; }
+  .card-bar span:nth-child(2) { background: #FEBC2E; }
+  .card-bar span:nth-child(3) { background: #28C840; }
+
+  .fp-label { margin-bottom: 0.8rem; color: var(--muted); }
+
+  .fp-track { display: flex; align-items: center; gap: 0.8rem; margin: 1.2rem 0; }
+  .fp-node {
+    width: 50px; height: 50px; border-radius: 50%;
+    display: grid; place-items: center;
+    font-weight: 800; font-size: 0.88rem;
+    border: 2.5px solid;
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+  }
+  .fp-node.done { background: rgba(8,145,178,0.15); border-color: var(--cyan-2); color: var(--cyan-2); }
+  .fp-node.active {
+    background: var(--cyan); border-color: var(--cyan-2); color: var(--white);
+    box-shadow: 0 0 0 6px rgba(8,145,178,0.2), 0 4px 12px rgba(8,145,178,0.4);
+  }
+  .fp-node.locked { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.15); color: rgba(255,255,255,0.25); }
+  .fp-node.waiting { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.1); color: rgba(255,255,255,0.15); transform: scale(0.9); opacity: 0.5; }
+  .fp-line { flex: 1; height: 2.5px; background: rgba(255,255,255,0.08); border-radius: 2px; position: relative; overflow: hidden; }
+  .fp-line .fill { width: 0; height: 100%; background: var(--cyan-2); border-radius: 2px; transition: width 0.8s ease; }
+  .fp-line.done .fill { width: 100%; }
+
+  .fp-module { margin-top: 0.8rem; }
+  .fp-module h4 { font-size: 1rem; font-weight: 700; letter-spacing: -0.02em; }
+  .fp-module p { font-size: 0.85rem; color: var(--muted); margin-top: 0.15rem; }
+
+  .fp-stats { display: flex; gap: 0.8rem; margin-top: 1.5rem; }
+  .fp-stat {
+    flex: 1; background: var(--bg); border-radius: var(--radius);
+    padding: 0.9rem; text-align: center;
+  }
+  .fp-stat .num { font-size: 1.5rem; font-weight: 900; color: var(--cyan); line-height: 1; }
+  .fp-stat .lbl { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 0.25rem; font-family: 'JetBrains Mono', monospace; }
+
+  /* Progress bar inside card */
+  .fp-progress { margin-top: 1.2rem; }
+  .fp-progress-label { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; margin-bottom: 0.4rem; }
+  .fp-progress-bar { height: 8px; background: var(--bg-2); border-radius: 999px; overflow: hidden; }
+  .fp-progress-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--cyan), var(--cyan-2)); border-radius: 999px; transition: width 1.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+  /* SECTIONS */
+  section { padding: var(--section-pad) 1.5rem; }
+  .container { max-width: 1400px; margin: 0 auto; }
+
+  .section-eyebrow {
+    color: var(--cyan); margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .section-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--cyan); }
+  .section-title {
+    font-weight: 900; letter-spacing: -0.03em; line-height: 0.95;
+    font-size: var(--h2); text-transform: uppercase;
+    margin-bottom: 1.5rem; max-width: 16ch;
+  }
+  .section-title em {
+    font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400;
+    color: var(--cyan); letter-spacing: -0.01em;
+  }
+  .section-lede { font-size: clamp(1.05rem, 1.3vw, 1.2rem); color: var(--muted); max-width: 55ch; line-height: 1.6; }
+
+  /* PROBLEM */
+  .problem { background: var(--bg); }
+  .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  @media (max-width: 900px) { .problem-grid { grid-template-columns: 1fr; gap: 3rem; } }
+  .compare-stack { display: flex; flex-direction: column; gap: 1.2rem; }
+  .compare {
+    padding: 2rem; border-radius: var(--radius-lg);
+    border: 1px solid var(--border); position: relative;
+  }
+  .compare.old { background: rgba(15,23,42,0.02); opacity: 0.7; }
+  .compare.old h4 { text-decoration: line-through; text-decoration-color: rgba(239,68,68,0.5); }
+  .compare.old .tag { background: rgba(239,68,68,0.1); color: #DC2626; border-color: rgba(239,68,68,0.2); }
+  .compare.new { background: var(--white); border-color: rgba(8,145,178,0.2); box-shadow: 0 8px 24px rgba(8,145,178,0.06); }
+  .compare.new .tag { background: rgba(8,145,178,0.1); color: var(--cyan); border-color: rgba(8,145,178,0.2); }
+  .tag { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: 999px; border: 1px solid; display: inline-block; margin-bottom: 0.8rem; }
+  .compare h4 { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.4rem; }
+  .compare p { font-size: 0.95rem; color: var(--muted); line-height: 1.5; }
+
+  /* FEATURES */
+  .features { background: var(--white); }
+  .features-head { display: grid; grid-template-columns: 1.3fr 1fr; gap: 3rem; align-items: end; margin-bottom: 5rem; }
+  @media (max-width: 900px) { .features-head { grid-template-columns: 1fr; } }
+  .features-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.2rem; }
+  .feature {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 2.4rem;
+    transition: transform 0.35s, box-shadow 0.35s, border-color 0.35s;
+    min-height: 320px; display: flex; flex-direction: column;
+  }
+  .feature:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(15,23,42,0.06); border-color: rgba(8,145,178,0.3); }
+  .feature.dark { background: var(--ink); color: var(--bg); border-color: transparent; }
+  .feature.dark .feature-label { color: var(--cyan-2); }
+  .feature.dark p { color: rgba(248,250,252,0.65); }
+  .f-wide { grid-column: span 7; } .f-tall { grid-column: span 5; } .f-third { grid-column: span 4; }
+  @media (max-width: 900px) { .f-wide, .f-tall, .f-third { grid-column: span 12; } .feature { min-height: 0; } }
+
+  .feature-icon {
+    width: 54px; height: 54px; border-radius: 14px;
+    background: rgba(8,145,178,0.1); color: var(--cyan);
+    display: grid; place-items: center; margin-bottom: 1.2rem;
+  }
+  .feature.dark .feature-icon { background: rgba(34,211,238,0.15); color: var(--cyan-2); }
+  .feature-icon svg { width: 24px; height: 24px; }
+  .feature-label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.7rem; }
+  .feature h3 { font-size: clamp(1.3rem, 2vw, 1.7rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.12; margin-bottom: 0.7rem; }
+  .feature p { color: var(--muted); font-size: 0.98rem; line-height: 1.55; }
+
+  /* Animated feature visuals */
+  .feature-visual {
+    margin-top: auto; padding-top: 1.5rem;
+    position: relative; overflow: hidden;
+    border-radius: var(--radius);
+  }
+
+  /* Content Builder: file transform animation */
+  .transform-anim {
+    display: flex; align-items: center; justify-content: center; gap: 1rem;
+    padding: 1rem 0;
+  }
+  .file-icon {
+    width: 48px; height: 56px; background: var(--bg-2); border-radius: 8px;
+    display: grid; place-items: center;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; font-weight: 700;
+    color: var(--muted); letter-spacing: 0.05em;
+    border: 1px solid var(--border);
+    opacity: 0; transform: translateX(-20px);
+    transition: all 0.6s ease;
+  }
+  .file-icon.visible { opacity: 1; transform: translateX(0); }
+  .transform-arrow {
+    display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
+    color: var(--cyan); font-size: 1.2rem;
+    opacity: 0; transition: opacity 0.5s ease 0.4s;
+  }
+  .transform-arrow.visible { opacity: 1; }
+  .transform-arrow .spark { font-size: 1rem; animation: sparkle 1.2s ease-in-out infinite; }
+  .transform-arrow .spark:nth-child(1) { animation-delay: 0s; }
+  .transform-arrow .spark:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes sparkle { 0%,100% { opacity: 0.2; transform: scale(0.6) rotate(0deg); } 50% { opacity: 1; transform: scale(1.4) rotate(20deg); } }
+  .transform-arrow {
+    font-size: 1.5rem;
+    filter: drop-shadow(0 0 8px rgba(8,145,178,0.4));
+  }
+  .slides-preview {
+    display: flex; gap: 4px;
+    opacity: 0; transform: translateX(20px);
+    transition: all 0.6s ease 0.6s;
+  }
+  .slides-preview.visible { opacity: 1; transform: translateX(0); }
+  .slide-thumb {
+    width: 36px; height: 44px; border-radius: 6px;
+    border: 1px solid var(--border);
+    position: relative; overflow: hidden;
+    animation: slideGlow 3s ease-in-out infinite;
+    animation-delay: var(--sd, 0s);
+  }
+  .slide-thumb:nth-child(1) { background: linear-gradient(135deg, rgba(8,145,178,0.15), rgba(8,145,178,0.05)); --sd: 0s; }
+  .slide-thumb:nth-child(2) { background: linear-gradient(135deg, rgba(34,211,238,0.15), rgba(34,211,238,0.05)); --sd: 0.3s; }
+  .slide-thumb:nth-child(3) { background: linear-gradient(135deg, rgba(8,145,178,0.2), rgba(8,145,178,0.05)); --sd: 0.6s; }
+  .slide-thumb:nth-child(4) { background: linear-gradient(135deg, rgba(34,211,238,0.2), rgba(34,211,238,0.05)); --sd: 0.9s; }
+  @keyframes slideGlow { 0%,100% { box-shadow: none; } 50% { box-shadow: 0 0 12px rgba(8,145,178,0.2); } }
+  .slide-thumb .mini-line {
+    width: 60%; height: 2px; background: rgba(8,145,178,0.3);
+    border-radius: 1px; margin: 8px auto 3px;
+  }
+  .slide-thumb .mini-line:nth-child(2) { width: 45%; }
+  .slide-thumb .mini-block {
+    width: 70%; height: 12px; background: rgba(8,145,178,0.12);
+    border-radius: 2px; margin: 4px auto;
+  }
+
+  /* Admin: user dots appearing */
+  .user-dots {
+    display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; padding: 0.8rem 0;
+  }
+  .user-dot {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--bg-2), var(--bg-3));
+    border: 2px solid var(--white);
+    box-shadow: 0 2px 6px rgba(15,23,42,0.06);
+    opacity: 0; transform: scale(0.5);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: grid; place-items: center;
+    font-size: 0.55rem; font-weight: 700; color: var(--muted);
+  }
+  .user-dot.visible { opacity: 1; transform: scale(1); }
+  .user-dot.cyan { background: linear-gradient(135deg, rgba(8,145,178,0.2), rgba(34,211,238,0.15)); border-color: rgba(8,145,178,0.3); color: var(--cyan); }
+
+  /* Data control: shield pulse */
+  .shield-anim {
+    display: flex; justify-content: center; padding: 1rem 0;
+    position: relative;
+  }
+  .shield-svg {
+    width: 64px; height: 64px; color: var(--cyan);
+    filter: drop-shadow(0 0 12px rgba(8,145,178,0.3));
+    animation: shieldBeat 3s ease-in-out infinite;
+  }
+  @keyframes shieldBeat {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 12px rgba(8,145,178,0.3)); }
+    15%      { transform: scale(1.08); filter: drop-shadow(0 0 20px rgba(8,145,178,0.5)); }
+    30%      { transform: scale(1); }
+  }
+  .shield-ring {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 90px; height: 90px; border: 1.5px solid rgba(8,145,178,0.15);
+    border-radius: 50%;
+    animation: ringExpand 3s ease-in-out infinite;
+  }
+  .shield-ring:nth-child(2) { width: 110px; height: 110px; animation-delay: 0.5s; border-color: rgba(8,145,178,0.08); }
+  @keyframes ringExpand { 0%,100% { transform: translate(-50%,-50%) scale(1); opacity: 1; } 50% { transform: translate(-50%,-50%) scale(1.1); opacity: 0.4; } }
+
+  /* Onboarding: path with icons */
+  .journey-path {
+    display: flex; align-items: center; gap: 0.5rem; justify-content: center; padding: 0.8rem 0;
+  }
+  .journey-stop {
+    width: 52px; height: 52px; border-radius: 16px;
+    background: var(--bg-2); border: 2px solid var(--border);
+    display: grid; place-items: center;
+    font-size: 1.4rem;
+    opacity: 0; transform: translateY(16px) scale(0.7);
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+  }
+  .journey-stop.visible { opacity: 1; transform: translateY(0) scale(1); }
+  .journey-stop.lit {
+    background: var(--cyan-soft); border-color: var(--cyan);
+    box-shadow: 0 0 16px rgba(8,145,178,0.25), 0 4px 12px rgba(8,145,178,0.15);
+    animation: stopBounce 2.5s ease-in-out infinite;
+  }
+  .journey-stop.lit::after {
+    content: ''; position: absolute; inset: -6px;
+    border: 1.5px solid rgba(8,145,178,0.2);
+    border-radius: 20px;
+    animation: ringFade 2.5s ease-in-out infinite;
+  }
+  @keyframes stopBounce {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50%      { transform: translateY(-4px) scale(1.06); }
+  }
+  @keyframes ringFade {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: 0.3; transform: scale(1.15); }
+  }
+  .journey-trail {
+    width: 28px; height: 3px; background: var(--bg-2);
+    border-radius: 2px;
+    position: relative; overflow: hidden;
+    transition: background 0.5s;
+  }
+  .journey-trail.lit {
+    background: var(--cyan);
+    box-shadow: 0 0 8px rgba(8,145,178,0.3);
+  }
+  .journey-trail.lit::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+    animation: trailShimmer 2s linear infinite;
+  }
+  @keyframes trailShimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+
+  /* Dashboard scan line */
+  .dash-scan {
+    position: absolute; top: 0; left: -100%; width: 100%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cyan-2), transparent);
+    animation: dashScan 4s linear infinite;
+    pointer-events: none;
+  }
+  @keyframes dashScan { 0% { left: -100%; } 100% { left: 200%; } }
+
+  /* Animated progress bars inside dark feature */
+  .prog-bars { margin-top: auto; padding-top: 1.5rem; display: flex; flex-direction: column; gap: 0.6rem; }
+  .prog-row { display: flex; align-items: center; gap: 0.6rem; font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; color: rgba(248,250,252,0.6); }
+  .prog-row .bar-bg { flex: 1; height: 6px; background: rgba(248,250,252,0.08); border-radius: 999px; overflow: hidden; }
+  .prog-row .bar-fill { height: 100%; border-radius: 999px; transition: width 1.2s cubic-bezier(0.34, 1.56, 0.64, 1); width: 0; }
+  .prog-row .bar-fill.cyan { background: var(--cyan-2); }
+  .prog-row .bar-fill.teal { background: #2DD4BF; }
+  .prog-row .bar-fill.amber { background: #FBBF24; }
+  .prog-row.grown .bar-fill { width: var(--w); }
+
+  /* HOW (dark section) */
+  .how {
+    background: var(--ink); color: var(--bg);
+    position: relative; overflow: hidden;
+  }
+  .how::before {
+    content: ''; position: absolute; top: -20%; right: -10%;
+    width: 55vw; height: 55vw;
+    background: radial-gradient(circle, rgba(8,145,178,0.15), transparent 70%);
+    filter: blur(40px); pointer-events: none;
+  }
+  .how .section-eyebrow { color: var(--cyan-2); }
+  .how .section-eyebrow::before { background: var(--cyan-2); }
+  .how .section-title { color: var(--bg); }
+  .how .section-title em { color: var(--cyan-2); }
+  .how .section-lede { color: rgba(248,250,252,0.6); }
+  .how-head { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: end; margin-bottom: 5rem; max-width: 1400px; margin-left: auto; margin-right: auto; }
+  @media (max-width: 900px) { .how-head { grid-template-columns: 1fr; } }
+  .steps { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; position: relative; z-index: 2; }
+  @media (max-width: 800px) { .steps { grid-template-columns: 1fr; } }
+  .step {
+    background: rgba(248,250,252,0.04); border: 1px solid rgba(248,250,252,0.08);
+    border-radius: var(--radius-lg); padding: 2.4rem;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .step:hover { border-color: rgba(8,145,178,0.3); background: rgba(248,250,252,0.06); }
+  .step-num { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 3.2rem; line-height: 1; color: var(--cyan-2); margin-bottom: 1.2rem; display: block; }
+  .step h4 { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.6rem; }
+  .step p { color: rgba(248,250,252,0.6); font-size: 0.98rem; line-height: 1.55; }
+
+  /* STATS */
+  .stats { background: var(--bg); }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; max-width: 1200px; margin: 0 auto; text-align: center; }
+  @media (max-width: 800px) { .stats-grid { grid-template-columns: 1fr 1fr; } }
+  .stat-block .stat-num {
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400;
+    color: var(--cyan); line-height: 1; letter-spacing: -0.03em;
+  }
+  .stat-block .stat-label { margin-top: 0.6rem; color: var(--muted); font-size: 0.95rem; max-width: 20ch; margin-left: auto; margin-right: auto; }
+
+  /* QUOTE */
+  .quote-section { background: var(--white); text-align: center; }
+  .quote-section blockquote {
+    max-width: 26ch; margin: 0 auto;
+    font-size: clamp(2rem, 4vw, 3.4rem);
+    font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400;
+    line-height: 1.15; letter-spacing: -0.02em;
+  }
+  .quote-section .hl { background: linear-gradient(180deg, transparent 62%, rgba(8,145,178,0.22) 62%); padding: 0 0.1em; }
+  .quote-attr { margin-top: 2rem; color: var(--muted); font-size: 0.95rem; }
+
+  /* PRODUCT SUITE */
+  .suite { background: var(--bg); }
+  .suite-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; max-width: 1280px; margin: 4rem auto 0; }
+  @media (max-width: 900px) { .suite-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .suite-grid { grid-template-columns: 1fr; } }
+  .suite-item {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 2.2rem 1.8rem;
+    text-align: center; transition: transform 0.4s, border-color 0.4s, box-shadow 0.4s;
+    position: relative; overflow: hidden;
+  }
+  .suite-item:hover {
+    transform: translateY(-8px);
+    border-color: rgba(8,145,178,0.35);
+    box-shadow: 0 20px 50px rgba(15,23,42,0.08);
+  }
+  .suite-item h4 { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.4rem; }
+  .suite-item p { font-size: 0.88rem; color: var(--muted); line-height: 1.45; }
+
+  /* Animated visuals for each suite card */
+  .suite-visual {
+    width: 100%; height: 140px;
+    margin-bottom: 1.2rem;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  /* Workforce: mini bar chart */
+  .wf-bars {
+    display: flex; align-items: flex-end; gap: 5px; height: 100px;
+    padding: 0 1rem;
+  }
+  .wf-bar {
+    width: 18px; border-radius: 4px 4px 0 0;
+    transform-origin: bottom;
+    transform: scaleY(0);
+    transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .wf-bar.grown { transform: scaleY(1); }
+  .wf-bar.b1 { height: 55%; background: var(--cyan); }
+  .wf-bar.b2 { height: 78%; background: var(--cyan-2); }
+  .wf-bar.b3 { height: 42%; background: var(--bg-3); }
+  .wf-bar.b4 { height: 90%; background: var(--cyan); }
+  .wf-bar.b5 { height: 65%; background: var(--cyan-2); }
+  .wf-bar.b6 { height: 85%; background: var(--cyan); }
+  .wf-bar.b7 { height: 50%; background: var(--bg-3); }
+  .wf-bar.b8 { height: 95%; background: linear-gradient(180deg, var(--cyan), var(--cyan-2)); }
+  .wf-line {
+    position: absolute; top: 25%; left: 8%; right: 8%;
+    height: 2px; overflow: hidden;
+  }
+  .wf-line::after {
+    content: ''; display: block;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(8,145,178,0.4), transparent);
+    animation: scanH 3s linear infinite;
+  }
+  @keyframes scanH { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+
+  /* PulseCheck: animated concentric rings */
+  .pulse-rings {
+    position: relative; width: 110px; height: 110px;
+  }
+  .pulse-ring {
+    position: absolute; inset: 0;
+    border: 2px solid rgba(8,145,178,0.2);
+    border-radius: 50%;
+    animation: ringPulse 3s ease-in-out infinite;
+  }
+  .pulse-ring:nth-child(1) { inset: 0; animation-delay: 0s; border-color: rgba(8,145,178,0.5); }
+  .pulse-ring:nth-child(2) { inset: -12px; animation-delay: 0.4s; border-color: rgba(8,145,178,0.3); }
+  .pulse-ring:nth-child(3) { inset: -24px; animation-delay: 0.8s; border-color: rgba(8,145,178,0.15); }
+  .pulse-ring:nth-child(4) { inset: -36px; animation-delay: 1.2s; border-color: rgba(8,145,178,0.08); }
+  @keyframes ringPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50%      { transform: scale(1.08); opacity: 0.6; }
+  }
+  .pulse-center {
+    position: absolute;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 44px; height: 44px;
+    background: linear-gradient(135deg, var(--cyan), var(--cyan-2));
+    border-radius: 50%;
+    display: grid; place-items: center;
+    box-shadow: 0 0 20px rgba(8,145,178,0.4);
+    animation: centerBeat 2s ease-in-out infinite;
+  }
+  @keyframes centerBeat {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    15%      { transform: translate(-50%, -50%) scale(1.12); }
+    30%      { transform: translate(-50%, -50%) scale(1); }
+  }
+  .pulse-center svg { width: 20px; height: 20px; color: var(--white); }
+
+  /* Pocket Customer: voice waveform */
+  .voice-eq {
+    display: flex; align-items: center; gap: 3px; height: 80px;
+  }
+  .voice-bar {
+    width: 4px; height: 100%;
+    border-radius: 999px;
+    background: var(--cyan);
+    transform-origin: center;
+    animation: voiceBar var(--dur, 1.2s) ease-in-out infinite;
+    animation-delay: var(--del, 0s);
+    opacity: 0.7;
+  }
+  @keyframes voiceBar {
+    0%, 100% { transform: scaleY(var(--min, 0.1)); }
+    50%      { transform: scaleY(var(--max, 0.8)); }
+  }
+
+  /* LearnOS: FlightPath mini nodes */
+  .fp-mini {
+    display: flex; align-items: center; gap: 6px;
+  }
+  .fp-mini-node {
+    width: 32px; height: 32px; border-radius: 50%;
+    border: 2.5px solid var(--bg-3);
+    display: grid; place-items: center;
+    font-size: 0.7rem; font-weight: 800;
+    color: var(--bg-3);
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .fp-mini-node.lit { border-color: var(--cyan); color: var(--cyan); background: var(--cyan-soft); }
+  .fp-mini-node.active { border-color: var(--cyan); color: var(--white); background: var(--cyan); box-shadow: 0 0 12px rgba(8,145,178,0.35); }
+  .fp-mini-line { width: 16px; height: 2.5px; background: var(--bg-2); border-radius: 2px; transition: background 0.5s; }
+  .fp-mini-line.lit { background: var(--cyan); }
+
+  /* DEMO FORM */
+  .demo-form {
+    background: var(--ink); color: var(--bg);
+    position: relative; overflow: hidden;
+    padding: var(--section-pad) 1.5rem;
+  }
+  .demo-form::before {
+    content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 650px; height: 650px;
+    background: radial-gradient(circle, rgba(8,145,178,0.15), transparent 70%);
+    pointer-events: none;
+  }
+  .form-wrap { max-width: 720px; margin: 0 auto; position: relative; z-index: 2; text-align: center; }
+  .form-wrap .section-title { margin: 1rem auto 1.5rem; color: var(--bg); }
+  .form-wrap .section-title em { color: var(--cyan-2); }
+  .form-wrap .section-lede { margin: 0 auto 3rem; color: rgba(248,250,252,0.6); }
+  .form-wrap .section-eyebrow { justify-content: center; color: var(--cyan-2); }
+  .form-wrap .section-eyebrow::before { background: var(--cyan-2); }
+
+  form.booking {
+    text-align: left;
+    background: rgba(30,41,59,0.5);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border-dark);
+    border-radius: 28px; padding: 2.5rem;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+  .field { display: flex; flex-direction: column; gap: 0.4rem; }
+  .field label { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+  .field input, .field select, .field textarea {
+    background: rgba(15,23,42,0.6); border: 1px solid var(--border-dark);
+    padding: 0.9rem 1rem; border-radius: var(--radius);
+    color: var(--bg); font-family: inherit; font-size: 1rem;
+    transition: border-color 0.2s;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--cyan); }
+  .field textarea { min-height: 110px; resize: vertical; }
+  .form-cta { display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; flex-wrap: wrap; gap: 1rem; }
+  .form-meta { font-size: 0.82rem; color: var(--muted); display: flex; align-items: center; gap: 0.6rem; }
+  .form-meta svg { width: 14px; height: 14px; color: var(--cyan-2); }
+  button[type="submit"] {
+    padding: 1.1rem 2rem; font-size: 1rem;
+    background: var(--cyan); color: var(--white);
+    border: none; border-radius: 999px; font-weight: 800; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 12px 30px rgba(8,145,178,0.35);
+  }
+  button[type="submit"]:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(8,145,178,0.5); }
+  .success { display: none; text-align: center; padding: 3rem 2rem; background: rgba(8,145,178,0.1); border: 1px solid rgba(8,145,178,0.3); border-radius: var(--radius-lg); }
+  .success svg { width: 64px; height: 64px; color: var(--cyan-2); margin: 0 auto 1rem; display: block; }
+  .success h3 { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .success p { color: rgba(248,250,252,0.6); }
+
+  /* POWERED BY */
+  .powered-section {
+    background: radial-gradient(ellipse at 50% 50%, rgba(8,145,178,0.06), transparent 60%), var(--bg);
+    padding: clamp(3rem, 5vw, 5rem) 1.5rem clamp(5rem, 8vw, 7rem);
+    border-top: 1px solid var(--border); text-align: center;
+  }
+  .powered-link { display: inline-block; text-decoration: none; color: var(--ink); transition: transform 0.3s; }
+  .powered-link:hover { transform: translateY(-3px); }
+  .powered-eyebrow { color: var(--muted); margin-bottom: 1.5rem; display: inline-flex; align-items: center; gap: 0.6rem; }
+  .powered-eyebrow::before, .powered-eyebrow::after { content: ''; width: 28px; height: 1px; background: var(--border); }
+  .powered-headline { font-weight: 900; letter-spacing: -0.035em; line-height: 0.9; font-size: clamp(3rem, 9vw, 8rem); text-transform: uppercase; }
+  .powered-headline .pw-text { display: block; color: var(--ink); }
+  .powered-headline .pw-brand { color: var(--cyan); font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; display: inline-flex; align-items: baseline; gap: 0.3em; }
+  .powered-link:hover .pw-brand { color: var(--cyan-deep); }
+  .pw-arrow { font-family: 'Archivo', sans-serif; font-style: normal; font-weight: 900; font-size: 0.6em; transition: transform 0.3s; }
+  .powered-link:hover .pw-arrow { transform: translate(0.15em, -0.1em); }
+  .powered-desc { margin-top: 1.5rem; font-size: 1rem; color: var(--muted); max-width: 48ch; margin-left: auto; margin-right: auto; }
+  .powered-url {
+    margin-top: 1.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
+    color: var(--cyan); display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.7rem 1.3rem; border: 1px solid rgba(8,145,178,0.25);
+    border-radius: 999px; background: rgba(8,145,178,0.05);
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .powered-link:hover .powered-url { background: rgba(8,145,178,0.1); border-color: rgba(8,145,178,0.4); }
+
+  /* FOOTER */
+  footer { background: var(--ink); color: var(--bg); padding: 4rem 1.5rem 2.5rem; }
+  .footer-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3rem; align-items: center; }
+  @media (max-width: 800px) { .footer-inner { grid-template-columns: 1fr; text-align: center; gap: 2rem; } }
+  .footer-links { display: flex; gap: 2rem; justify-content: center; font-size: 0.9rem; }
+  .footer-links a { color: rgba(248,250,252,0.6); transition: color 0.2s; }
+  .footer-links a:hover { color: var(--cyan-2); }
+  .footer-pb { text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+  @media (max-width: 800px) { .footer-pb { text-align: center; } }
+  .footer-pb b { color: var(--cyan-2); }
+  .footer-legal { max-width: 1400px; margin: 3rem auto 0; padding-top: 2rem; border-top: 1px solid rgba(248,250,252,0.08); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; font-size: 0.8rem; color: rgba(248,250,252,0.4); }
+
+  @media (max-width: 560px) {
+    :root { --section-pad: 4rem; }
+    .feature { padding: 1.75rem; }
+    form.booking { padding: 1.75rem; }
+    .fp-card { padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <a href="#" class="brand fade d1">
+    <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
+    LearnOS
+  </a>
+  <nav class="fade d2">
+    <ul>
+      <li><a href="#product">Product</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#demo" class="nav-cta">Book demo →</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="orb one"></div><div class="orb two"></div><div class="orb three"></div>
+  </div>
+
+  <div class="hero-inner">
+    <div>
+      <span class="eyebrow mono fade d1"><span class="dot"></span> Custom LMS. Fixed price. Owned forever.</span>
+
+      <h1 class="display">
+        <span class="l1 fade d2">Stop paying</span>
+        <span class="l2 fade d3">to update</span>
+        <span class="l3 fade d4">your own LMS.</span>
+      </h1>
+
+      <p class="hero-sub fade d5">
+        <b>No seat fees. No update invoices. One build, One price, Yours forever.</b>
+        Other LMS platforms charge you monthly per user, or hit you with an $80-100K build
+        then bill you again every time you want to change a slide.
+      </p>
+
+      <div class="hero-ctas fade d6">
+        <a href="#demo" class="btn btn-secondary">Book a 25-min demo <span class="arrow">→</span></a>
+        <a href="#features" class="btn btn-primary">See what's inside</a>
+      </div>
+
+      <div class="hero-trust fade d7">
+        <span class="line"></span>
+        Built for L&amp;D teams, ops leaders, and contact centre managers
+      </div>
+    </div>
+
+    <div class="fp-card" id="fpCard" style="opacity:1;">
+      <div class="card-bar"><span></span><span></span><span></span></div>
+      <div class="fp-label mono">FlightPath Onboarding</div>
+
+      <div class="fp-track" id="fpTrack">
+        <div class="fp-node waiting" data-step="1">1</div>
+        <div class="fp-line"><div class="fill"></div></div>
+        <div class="fp-node waiting" data-step="2">2</div>
+        <div class="fp-line"><div class="fill"></div></div>
+        <div class="fp-node waiting" data-step="3">3</div>
+        <div class="fp-line"><div class="fill"></div></div>
+        <div class="fp-node waiting" data-step="4">4</div>
+        <div class="fp-line"><div class="fill"></div></div>
+        <div class="fp-node waiting" data-step="5">5</div>
+      </div>
+
+      <div class="fp-module">
+        <h4 id="fpModuleName">Loading module...</h4>
+        <p id="fpModuleDesc">Preparing your FlightPath</p>
+      </div>
+
+      <div class="fp-progress">
+        <div class="fp-progress-label"><span>Overall progress</span><span id="fpPercent">0%</span></div>
+        <div class="fp-progress-bar"><div class="fp-progress-fill" id="fpFill"></div></div>
+      </div>
+
+      <div class="fp-stats">
+        <div class="fp-stat"><div class="num" id="fpComp">0%</div><div class="lbl">Completion</div></div>
+        <div class="fp-stat"><div class="num" id="fpEnrolled">0</div><div class="lbl">Enrolled</div></div>
+        <div class="fp-stat"><div class="num" id="fpScore">0</div><div class="lbl">Avg Score</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem" id="product">
+  <div class="container">
+    <div class="problem-grid">
+      <div>
+        <div class="section-eyebrow mono reveal">The Problem</div>
+        <h2 class="section-title reveal">Two broken models. <em>Neither</em> works.</h2>
+        <p class="section-lede reveal">
+          SaaS platforms bleed you monthly. Fixed-price builds charge you $80-100K
+          upfront then send another invoice every time you want to change a slide.
+          Both models keep you dependent. LearnOS doesn't.
+        </p>
+      </div>
+      <div class="compare-stack reveal">
+        <div class="compare old">
+          <span class="tag">SaaS model</span>
+          <h4>$12/seat/month, forever</h4>
+          <p>Locked templates, someone else's branding, data on their servers. Cancel and you lose everything you built.</p>
+        </div>
+        <div class="compare old">
+          <span class="tag">Fixed-build model</span>
+          <h4>$80-100K upfront, then pay for every update</h4>
+          <p>You "own" the platform but can't touch it. Every content change, new module, or cohort upload comes with a change request and another bill.</p>
+        </div>
+        <div class="compare new">
+          <span class="tag">LearnOS</span>
+          <h4>Fixed price. Self-managed. Update it yourself, forever.</h4>
+          <p>Your domain, your S3 bucket, your brand. Upload new content, add programmes, create cohorts, edit anything, anytime, without coming back to us or paying another cent.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="container">
+    <div class="features-head">
+      <div class="reveal">
+        <div class="section-eyebrow mono">What you get</div>
+        <h2 class="section-title">A complete <em>LMS</em> you actually own.</h2>
+      </div>
+      <p class="section-lede reveal">
+        Upload PowerPoints, build interactive modules, track compliance,
+        and watch your team's capability lift. No IT department needed.
+      </p>
+    </div>
+
+    <div class="features-grid stagger">
+      <div class="feature f-wide reveal" style="--i:1" id="contentFeature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><path d="M14 2v6h6"/></svg></div>
+        <div class="feature-label">01 · Content Builder</div>
+        <h3>Upload a PowerPoint. Get a course.</h3>
+        <p>Drop in your existing slide decks and PDFs. LearnOS converts them into structured online learning with video, text, photos, quizzes, and reflection prompts, all tracked.</p>
+        <div class="feature-visual">
+          <div class="transform-anim">
+            <div class="file-icon" id="fileIcon1">.PPTX</div>
+            <div class="file-icon" id="fileIcon2">.PDF</div>
+            <div class="transform-arrow" id="transformArrow">
+              <span class="spark">&#10024;</span>
+              &#10132;
+              <span class="spark">&#10024;</span>
+            </div>
+            <div class="slides-preview" id="slidesPreview">
+              <div class="slide-thumb"><div class="mini-block"></div><div class="mini-line"></div><div class="mini-line"></div></div>
+              <div class="slide-thumb"><div class="mini-line"></div><div class="mini-block"></div><div class="mini-line"></div></div>
+              <div class="slide-thumb"><div class="mini-block"></div><div class="mini-line"></div><div class="mini-line"></div></div>
+              <div class="slide-thumb"><div class="mini-line"></div><div class="mini-line"></div><div class="mini-block"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature f-tall dark reveal" style="--i:2" id="complianceFeature">
+        <div class="dash-scan"></div>
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 15l4-4 4 4 5-6"/></svg></div>
+        <div class="feature-label">02 · Compliance Dashboard</div>
+        <h3>Real-time visibility across the workforce.</h3>
+        <p>Track completion, engagement, and compliance. Managers see exactly who's done what.</p>
+        <div class="prog-bars" id="progBars">
+          <div class="prog-row"><span style="width:5ch">Sales</span><div class="bar-bg"><div class="bar-fill cyan" style="--w:92%"></div></div><span>92%</span></div>
+          <div class="prog-row"><span style="width:5ch">Ops</span><div class="bar-bg"><div class="bar-fill teal" style="--w:78%"></div></div><span>78%</span></div>
+          <div class="prog-row"><span style="width:5ch">L&amp;D</span><div class="bar-bg"><div class="bar-fill cyan" style="--w:100%"></div></div><span>100%</span></div>
+          <div class="prog-row"><span style="width:5ch">CS</span><div class="bar-bg"><div class="bar-fill amber" style="--w:65%"></div></div><span>65%</span></div>
+        </div>
+      </div>
+
+      <div class="feature f-third reveal" style="--i:3" id="adminFeature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <div class="feature-label">03 · Admin Console</div>
+        <h3>Bulk upload users in 30 seconds.</h3>
+        <p>Create logins, assign manager or agent roles, and organise cohorts. No IT ticket needed.</p>
+        <div class="feature-visual">
+          <div class="user-dots" id="userDots"></div>
+        </div>
+      </div>
+
+      <div class="feature f-third dark reveal" style="--i:4" id="dataFeature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="feature-label">04 · Your Data, Your Control</div>
+        <h3>Your domain. Your S3 bucket.</h3>
+        <p>Everything runs on infrastructure you own. Full control over access, retention, and compliance. AI keys are yours too.</p>
+        <div class="feature-visual">
+          <div class="shield-anim">
+            <div class="shield-ring"></div>
+            <div class="shield-ring"></div>
+            <svg class="shield-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4" stroke-width="2.2"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature f-third reveal" style="--i:5" id="onboardFeature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></div>
+        <div class="feature-label">05 · Gamified Onboarding</div>
+        <h3>FlightPath, summit climb, explorer's journal.</h3>
+        <p>Turn onboarding from a checklist into a visual, gamified journey tied to real learning outcomes. Any metaphor your business chooses.</p>
+        <div class="feature-visual">
+          <div class="journey-path" id="journeyPath">
+            <div class="journey-stop">&#9992;</div>
+            <div class="journey-trail"></div>
+            <div class="journey-stop">&#9968;</div>
+            <div class="journey-trail"></div>
+            <div class="journey-stop">&#9733;</div>
+            <div class="journey-trail"></div>
+            <div class="journey-stop">&#127942;</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="container">
+    <div class="how-head">
+      <div class="reveal">
+        <div class="section-eyebrow mono">How it works</div>
+        <h2 class="section-title">Built once. <em>Owned</em> forever.</h2>
+      </div>
+      <p class="section-lede reveal">No subscription. No implementation project stretching six months. We build it. You run it.</p>
+    </div>
+    <div class="steps stagger">
+      <div class="step reveal" style="--i:1">
+        <span class="step-num">01</span>
+        <h4>We build your LMS.</h4>
+        <p>Custom to your brand, your methodology, your gamified onboarding metaphor. Interactive modules, quizzes, video, compliance tracking, all included.</p>
+      </div>
+      <div class="step reveal" style="--i:2">
+        <span class="step-num">02</span>
+        <h4>You take ownership.</h4>
+        <p>Your domain. Your S3 bucket. Your API keys. The entire platform runs on your infrastructure from day one.</p>
+      </div>
+      <div class="step reveal" style="--i:3">
+        <span class="step-num">03</span>
+        <h4>Your team runs it.</h4>
+        <p>Upload new content, add programmes, create cohorts, edit anything. No developer, no ticket, no coming back to us.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid stagger">
+      <div class="stat-block reveal" style="--i:1">
+        <div class="stat-num">$0</div>
+        <p class="stat-label">Monthly seat fees. Ever.</p>
+      </div>
+      <div class="stat-block reveal" style="--i:2">
+        <div class="stat-num">100%</div>
+        <p class="stat-label">Your data. Your servers. Your control.</p>
+      </div>
+      <div class="stat-block reveal" style="--i:3">
+        <div class="stat-num">30s</div>
+        <p class="stat-label">To bulk upload a new cohort of users.</p>
+      </div>
+      <div class="stat-block reveal" style="--i:4">
+        <div class="stat-num">1</div>
+        <p class="stat-label">Fixed price. No surprises.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-section">
+  <div class="container">
+    <blockquote class="reveal">
+      We stopped paying $56K a year for an LMS nobody liked. LearnOS cost us <span class="hl">one build</span> and the team actually finishes the modules now.
+    </blockquote>
+    <div class="quote-attr reveal">Head of L&amp;D, 200-seat contact centre</div>
+  </div>
+</section>
+
+<!-- PRODUCT SUITE -->
+<section class="suite">
+  <div class="container" style="text-align: center;">
+    <div class="section-eyebrow mono reveal" style="justify-content: center;">The performOS Suite</div>
+    <h2 class="section-title reveal" style="margin: 0 auto 1.5rem; max-width: 22ch; text-transform: none; font-size: clamp(2.2rem, 5vw, 4.2rem);">LearnOS sits inside a <em>complete</em> platform.</h2>
+    <div class="suite-grid" id="suiteGrid">
+
+      <div class="suite-item reveal" style="--i:1">
+        <div class="suite-visual">
+          <div class="wf-bars" id="wfBars">
+            <div class="wf-bar b1"></div>
+            <div class="wf-bar b2"></div>
+            <div class="wf-bar b3"></div>
+            <div class="wf-bar b4"></div>
+            <div class="wf-bar b5"></div>
+            <div class="wf-bar b6"></div>
+            <div class="wf-bar b7"></div>
+            <div class="wf-bar b8"></div>
+          </div>
+          <div class="wf-line"></div>
+        </div>
+        <h4>Workforce Dashboard</h4>
+        <p>Revenue and performance tracking across your entire team, in real time.</p>
+      </div>
+
+      <div class="suite-item reveal" style="--i:2">
+        <div class="suite-visual">
+          <div class="pulse-rings">
+            <div class="pulse-ring"></div>
+            <div class="pulse-ring"></div>
+            <div class="pulse-ring"></div>
+            <div class="pulse-ring"></div>
+            <div class="pulse-center">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+          </div>
+        </div>
+        <h4>PulseCheck 360</h4>
+        <p>Weekly wellbeing and performance check-ins that flag what matters before it breaks.</p>
+      </div>
+
+      <div class="suite-item reveal" style="--i:3">
+        <div class="suite-visual">
+          <div class="voice-eq" id="voiceEq"></div>
+        </div>
+        <h4>Pocket Customer</h4>
+        <p>AI voice roleplay that lets your reps practise on AI, not real customers.</p>
+      </div>
+
+      <div class="suite-item reveal" style="--i:4; border-color: rgba(8,145,178,0.25);">
+        <div class="suite-visual">
+          <div class="fp-mini" id="fpMini"></div>
+        </div>
+        <h4>LearnOS</h4>
+        <p>Custom LMS, owned forever. One build, one price, no monthly fees.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- DEMO FORM -->
+<section class="demo-form" id="demo">
+  <div class="form-wrap">
+    <div class="section-eyebrow mono reveal">Book a demo</div>
+    <h2 class="section-title reveal" style="max-width: 20ch;">See <em>your</em> LMS built live.</h2>
+    <p class="section-lede reveal">25 minutes. Bring your onboarding challenge and we'll show you what your FlightPath could look like within three days.</p>
+
+    <form class="booking reveal" id="bookingForm">
+      <div class="form-row">
+        <div class="field"><label for="name">Your name</label><input type="text" id="name" required placeholder="Jane Smith"></div>
+        <div class="field"><label for="email">Work email</label><input type="email" id="email" required placeholder="jane@company.com"></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label for="company">Organisation</label><input type="text" id="company" required placeholder="Acme Pty Ltd"></div>
+        <div class="field"><label for="team">Team size</label>
+          <select id="team" required><option value="">Select...</option><option>1 - 50</option><option>50 - 250</option><option>250 - 1,000</option><option>1,000+</option></select>
+        </div>
+      </div>
+      <div class="form-row" style="grid-template-columns: 1fr;">
+        <div class="field"><label for="notes">What does onboarding look like today? (optional)</label><textarea id="notes" placeholder="e.g. We have 40 new starters a month and it's all PowerPoints emailed on day one..."></textarea></div>
+      </div>
+      <div class="form-cta">
+        <div class="form-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="10"/></svg> 25 minutes, live FlightPath preview</div>
+        <button type="submit">Book my demo <span class="arrow">→</span></button>
+      </div>
+    </form>
+    <div class="success" id="successMsg">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+      <h3>Booked. Check your inbox.</h3>
+      <p>We'll send a calendar link shortly. Bring your existing onboarding material and we'll show you the transformation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- POWERED BY -->
+<section class="powered-section">
+  <a class="powered-link" href="https://performos.com.au" target="_blank" rel="noopener">
+    <div class="powered-eyebrow mono">Part of the family</div>
+    <h2 class="powered-headline">
+      <span class="pw-text">Powered by</span>
+      <span class="pw-brand">performOS <span class="pw-arrow">↗</span></span>
+    </h2>
+    <p class="powered-desc">LearnOS is built and delivered by performOS, the operating system for high-performance teams.</p>
+    <span class="powered-url">performos.com.au →</span>
+  </a>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="brand" style="color: var(--bg);">
+      <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
+      LearnOS
+    </div>
+    <div class="footer-links"><a href="#product">Product</a><a href="#features">Features</a><a href="#how">How it works</a><a href="#demo">Demo</a></div>
+    <div class="footer-pb">Powered by <b>performOS</b></div>
+  </div>
+  <div class="footer-legal"><span>© 2026 LearnOS. All rights reserved.</span><span>One build. One price. Owned forever.</span></div>
+</footer>
+
+<script>
+  /* SCROLL REVEAL */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* HEADER */
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 30); });
+
+  /* FLIGHTPATH ANIMATION */
+  const fpCard = document.getElementById('fpCard');
+  let fpPlayed = false;
+  const modules = [
+    { name: 'Module 1: Welcome & Culture', desc: '3 slides, 1 video, 1 reflection' },
+    { name: 'Module 2: Systems & Tools', desc: '5 slides, 2 quizzes' },
+    { name: 'Module 3: Discovery Questions', desc: '4 slides, 1 quiz, 1 reflection' },
+    { name: 'Module 4: Objection Handling', desc: '6 slides, 2 quizzes, 1 roleplay' },
+    { name: 'Module 5: Certification', desc: 'Final assessment, badge awarded' },
+  ];
+
+  function runFlightPath() {
+    if (fpPlayed) return; fpPlayed = true;
+    const nodes = document.querySelectorAll('.fp-node');
+    const lines = document.querySelectorAll('.fp-line');
+    const modName = document.getElementById('fpModuleName');
+    const modDesc = document.getElementById('fpModuleDesc');
+    const percent = document.getElementById('fpPercent');
+    const fill = document.getElementById('fpFill');
+
+    let step = 0;
+    function advance() {
+      if (step >= 5) return;
+      const node = nodes[step];
+      const mod = modules[step];
+
+      if (step > 0) {
+        nodes[step - 1].classList.remove('active');
+        nodes[step - 1].classList.add('done');
+        lines[step - 1].classList.add('done');
+      }
+
+      node.classList.remove('waiting', 'locked');
+      node.classList.add('active');
+      modName.textContent = mod.name;
+      modDesc.textContent = mod.desc;
+
+      const pct = Math.round(((step + 1) / 5) * 100);
+      fill.style.width = pct + '%';
+      percent.textContent = pct + '%';
+
+      step++;
+
+      if (step < 5) {
+        for (let i = step; i < 5; i++) {
+          nodes[i].classList.remove('waiting');
+          nodes[i].classList.add('locked');
+        }
+      }
+
+      if (step <= 4) {
+        setTimeout(advance, 1200);
+      } else {
+        setTimeout(() => {
+          nodes[4].classList.remove('active');
+          nodes[4].classList.add('done');
+          animateCount('fpComp', 87, '%');
+          animateCount('fpEnrolled', 24, '');
+          animateCount('fpScore', 4.6, '', true);
+          // Reset and loop after a pause
+          setTimeout(() => {
+            step = 0;
+            nodes.forEach(n => { n.classList.remove('done', 'active', 'lit'); n.classList.add('waiting'); });
+            lines.forEach(l => l.classList.remove('done'));
+            fill.style.width = '0%';
+            percent.textContent = '0%';
+            document.getElementById('fpComp').textContent = '0%';
+            document.getElementById('fpEnrolled').textContent = '0';
+            document.getElementById('fpScore').textContent = '0';
+            setTimeout(advance, 600);
+          }, 3000);
+        }, 800);
+      }
+    }
+    setTimeout(advance, 600);
+  }
+
+  function animateCount(id, target, suffix, isFloat) {
+    const el = document.getElementById(id);
+    let s = 0; const steps = 30;
+    const iv = setInterval(() => {
+      s++;
+      const val = isFloat ? ((target / steps) * s).toFixed(1) : Math.round((target / steps) * s);
+      el.textContent = val + suffix;
+      if (s >= steps) { el.textContent = (isFloat ? target.toFixed(1) : target) + suffix; clearInterval(iv); }
+    }, 25);
+  }
+
+  const fpIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { runFlightPath(); fpIO.unobserve(e.target); } });
+  }, { threshold: 0.3 });
+  if (fpCard) fpIO.observe(fpCard);
+
+  /* FEATURE CARD ANIMATIONS */
+  const featuresSection = document.querySelector('.features');
+  let featPlayed = false;
+
+  function runFeatureAnims() {
+    if (featPlayed) return; featPlayed = true;
+
+    // Content Builder: file → slides transform
+    setTimeout(() => document.getElementById('fileIcon1').classList.add('visible'), 200);
+    setTimeout(() => document.getElementById('fileIcon2').classList.add('visible'), 400);
+    setTimeout(() => document.getElementById('transformArrow').classList.add('visible'), 700);
+    setTimeout(() => document.getElementById('slidesPreview').classList.add('visible'), 900);
+
+    // Compliance: progress bars grow then loop
+    function animateCompBars() {
+      const rows = document.querySelectorAll('#progBars .prog-row');
+      rows.forEach(r => r.classList.remove('grown'));
+      rows.forEach((r, i) => {
+        setTimeout(() => r.classList.add('grown'), 300 + i * 250);
+      });
+      setTimeout(animateCompBars, 6000);
+    }
+    animateCompBars();
+
+    // Admin: user dots appear
+    const dots = document.getElementById('userDots');
+    if (dots) {
+      const names = ['JK','SM','AL','TD','RW','NP','CB','MH','KL','JR','FS','DG'];
+      names.forEach((n, i) => {
+        const d = document.createElement('div');
+        d.className = 'user-dot' + (i % 3 === 0 ? ' cyan' : '');
+        d.textContent = n;
+        dots.appendChild(d);
+        setTimeout(() => d.classList.add('visible'), 200 + i * 100);
+      });
+    }
+
+    // Onboarding: journey stops appear and light up
+    const stops = document.querySelectorAll('.journey-stop');
+    const trails = document.querySelectorAll('.journey-trail');
+    stops.forEach((s, i) => {
+      setTimeout(() => {
+        s.classList.add('visible');
+        setTimeout(() => s.classList.add('lit'), 400);
+        if (trails[i]) setTimeout(() => trails[i].classList.add('lit'), 500);
+      }, 300 + i * 350);
+    });
+  }
+
+  const featIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { runFeatureAnims(); featIO.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  if (featuresSection) featIO.observe(featuresSection);
+
+  /* SUITE ANIMATIONS */
+  const suiteGrid = document.getElementById('suiteGrid');
+  let suitePlayed = false;
+
+  function buildVoiceEq() {
+    const eq = document.getElementById('voiceEq');
+    if (!eq) return;
+    for (let i = 0; i < 28; i++) {
+      const bar = document.createElement('div');
+      bar.className = 'voice-bar';
+      const min = 0.08 + ((i * 31) % 15) / 100;
+      const max = 0.35 + ((i * 67) % 65) / 100;
+      const dur = 0.8 + ((i * 19) % 120) / 100;
+      const del = -((i * 13) % 200) / 100;
+      bar.style.setProperty('--min', min.toFixed(2));
+      bar.style.setProperty('--max', max.toFixed(2));
+      bar.style.setProperty('--dur', dur.toFixed(2) + 's');
+      bar.style.setProperty('--del', del.toFixed(2) + 's');
+      eq.appendChild(bar);
+    }
+  }
+  buildVoiceEq();
+
+  function buildFpMini() {
+    const fp = document.getElementById('fpMini');
+    if (!fp) return;
+    for (let i = 0; i < 5; i++) {
+      const node = document.createElement('div');
+      node.className = 'fp-mini-node';
+      node.textContent = i + 1;
+      node.dataset.step = i;
+      fp.appendChild(node);
+      if (i < 4) {
+        const line = document.createElement('div');
+        line.className = 'fp-mini-line';
+        fp.appendChild(line);
+      }
+    }
+  }
+  buildFpMini();
+
+  function runSuiteAnims() {
+    if (suitePlayed) return; suitePlayed = true;
+
+    // Workforce bars grow
+    document.querySelectorAll('.wf-bar').forEach((b, i) => {
+      setTimeout(() => b.classList.add('grown'), 150 + i * 80);
+    });
+
+    // FP mini nodes light up
+    const fpNodes = document.querySelectorAll('.fp-mini-node');
+    const fpLines = document.querySelectorAll('.fp-mini-line');
+    let step = 0;
+    function advanceFpMini() {
+      if (step >= 5) return;
+      if (step > 0) { fpNodes[step - 1].classList.remove('active'); fpNodes[step - 1].classList.add('lit'); }
+      if (step > 0 && fpLines[step - 1]) fpLines[step - 1].classList.add('lit');
+      fpNodes[step].classList.add('active');
+      step++;
+      if (step < 5) setTimeout(advanceFpMini, 600);
+      else setTimeout(() => { fpNodes[4].classList.remove('active'); fpNodes[4].classList.add('lit'); }, 600);
+    }
+    setTimeout(advanceFpMini, 400);
+  }
+
+  const suiteIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { runSuiteAnims(); suiteIO.unobserve(e.target); } });
+  }, { threshold: 0.2 });
+  if (suiteGrid) suiteIO.observe(suiteGrid);
+
+  /* FORM */
+  document.getElementById('bookingForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    e.target.style.display = 'none';
+    const s = document.getElementById('successMsg');
+    s.style.display = 'block';
+    s.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+</script>
+
+</body>
+</html>
