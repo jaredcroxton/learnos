@@ -26,19 +26,19 @@
   </g>
 
   <!-- Headline centered -->
-  <text x="600" y="280"
+  <text x="600" y="275"
         font-family="Archivo, 'Helvetica Neue', Arial, sans-serif"
-        font-weight="900" font-size="82"
+        font-weight="900" font-size="58"
         fill="#0F172A" text-anchor="middle"
         letter-spacing="-2">STOP PAYING</text>
-  <text x="600" y="370"
+  <text x="600" y="355"
         font-family="'Instrument Serif', Georgia, serif"
-        font-style="italic" font-size="90"
+        font-style="italic" font-size="65"
         fill="#0891B2" text-anchor="middle"
         letter-spacing="-2">to update</text>
-  <text x="600" y="460"
+  <text x="600" y="435"
         font-family="Archivo, 'Helvetica Neue', Arial, sans-serif"
-        font-weight="900" font-size="82"
+        font-weight="900" font-size="58"
         fill="#0F172A" text-anchor="middle"
         letter-spacing="-2">YOUR OWN LMS.</text>
 
