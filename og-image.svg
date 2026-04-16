@@ -15,9 +15,9 @@
   <rect x="80" y="60" width="56" height="56" rx="14" fill="url(#iconBg)"/>
   <text x="150" y="98" font-family="Archivo, sans-serif" font-weight="800" font-size="28" fill="#0F172A">LearnOS</text>
 
-  <text x="80" y="240" font-family="Archivo, sans-serif" font-weight="900" font-size="62" fill="#0F172A" letter-spacing="-2">STOP PAYING</text>
-  <text x="80" y="320" font-family="Georgia, serif" font-style="italic" font-size="68" fill="#0891B2" letter-spacing="-2">to update</text>
-  <text x="80" y="400" font-family="Archivo, sans-serif" font-weight="900" font-size="62" fill="#0F172A" letter-spacing="-2">YOUR OWN LMS.</text>
+  <text x="80" y="280" font-family="Archivo, sans-serif" font-weight="900" font-size="62" fill="#0F172A" letter-spacing="-2">STOP PAYING</text>
+  <text x="80" y="360" font-family="Georgia, serif" font-style="italic" font-size="68" fill="#0891B2" letter-spacing="-2">to update</text>
+  <text x="80" y="440" font-family="Archivo, sans-serif" font-weight="900" font-size="62" fill="#0F172A" letter-spacing="-2">YOUR OWN LMS.</text>
 
   <text x="80" y="520" font-family="monospace" font-size="14" fill="#64748B" letter-spacing="4">ONE BUILD .  ONE PRICE .  OWNED FOREVER</text>
   <text x="80" y="560" font-family="monospace" font-size="13" fill="#94A3B8" letter-spacing="2">POWERED BY PERFORMOS</text>
